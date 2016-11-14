@@ -4,7 +4,6 @@
 #include <vector>
 #include "../dynamic_library/singleton_container.h"
 #include "../static_library/utilities.h"
-#include "test_cpp.h"
 
 using namespace std;
 
