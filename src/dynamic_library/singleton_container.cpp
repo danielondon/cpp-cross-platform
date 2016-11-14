@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 #include "singleton_container.h"
 
 using namespace std;
@@ -23,17 +22,24 @@ void cSingleton::destroy()
 
 void cSingleton::printVector()
 {
-	vector<int> vect{ 1, 3, 2, 4, 5 };
-	for (auto& el : vect)
-		cout << " - " << el << endl;
+	for (auto& el : m_vContainer)
+		cout << el << " - ";
+	cout<<endl;
+}
+
+void cSingleton::addToContainer(int item)
+{
+	m_vContainer.push_back(item);
 }
 
 cSingleton::cSingleton()
 {
 	cout << "cSingleton was created" << endl;
+	m_vContainer = { 1, 3, 2, 4, 5 };
 }
 
 cSingleton::~cSingleton()
 {
 	cout << "cSingleton was destroyed" << endl;
 }
+

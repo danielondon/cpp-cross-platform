@@ -1,3 +1,5 @@
+#include <vector>
+
 class __declspec(dllexport) cSingleton
 {
 	static cSingleton* instance;
@@ -8,4 +10,7 @@ public:
 
 	~cSingleton();
 	void printVector();
+	void addToContainer(int item);
+private:
+	std::vector<int> m_vContainer;
 };
