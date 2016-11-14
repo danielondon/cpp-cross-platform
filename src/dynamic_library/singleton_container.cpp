@@ -1,26 +1,16 @@
 #include <iostream>
 #include "singleton_container.h"
+#include <boost/interprocess/shared_memory_object.hpp>
+#include <boost/interprocess/mapped_region.hpp>
 
 using namespace std;
-
-//cSingleton* cSingleton::instance = nullptr;
+using namespace boost::interprocess;
 
 ISingleton& GetSingleton()
 {
-	//if (!instance)
-	//	instance = new cSingleton;
 	static cSingleton instance;
 	return instance;
 }
-/*
-void cSingleton::destroy()
-{
-	if (instance != nullptr)
-	{
-		delete instance;
-		instance = nullptr;
-	}
-}*/
 
 void cSingleton::printVector()
 {
@@ -36,12 +26,19 @@ void cSingleton::addToContainer(int item)
 
 cSingleton::cSingleton()
 {
-	cout << "cSingleton was created" << endl;
+	// Open or create a shared memory object with name "shared_memory" with read_only mode.
+	shared_memory_object shm_obj(open_or_create, "shared_memory", read_write);
+    // Original space for Shared Memory
+	shm_obj.truncate(10000);
+
+    cout << "cSingleton was created" << endl;
+    // Initialize Container
 	m_vContainer = { 1, 3, 2, 4, 5 };
 }
 
 cSingleton::~cSingleton()
 {
+	shared_memory_object::remove("shared_memory");
 	cout << "cSingleton was destroyed" << endl;
 }
 

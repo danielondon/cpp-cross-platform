@@ -7,5 +7,8 @@ SET(CMAKE_CXX_STANDARD 11)
 # Output Directory
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
+# Verbose
+SET (CMAKE_VERBOSE_MAKEFILE 0)
+
 add_subdirectory(src)
 add_subdirectory(test)
