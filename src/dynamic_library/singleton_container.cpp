@@ -3,14 +3,16 @@
 
 using namespace std;
 
-cSingleton* cSingleton::instance = nullptr;
-cSingleton* cSingleton::getInstance()
+//cSingleton* cSingleton::instance = nullptr;
+
+ISingleton& GetSingleton()
 {
-	if (!instance)
-		instance = new cSingleton;
+	//if (!instance)
+	//	instance = new cSingleton;
+	static cSingleton instance;
 	return instance;
 }
-
+/*
 void cSingleton::destroy()
 {
 	if (instance != nullptr)
@@ -18,7 +20,7 @@ void cSingleton::destroy()
 		delete instance;
 		instance = nullptr;
 	}
-}
+}*/
 
 void cSingleton::printVector()
 {

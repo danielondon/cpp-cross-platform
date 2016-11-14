@@ -3,6 +3,7 @@
 #include <sstream>
 #include <vector>
 #include "../dynamic_library/singleton_container.h"
+#include "../static_library/utilities.h"
 #include "test_cpp.h"
 
 using namespace std;
@@ -12,10 +13,13 @@ int main()
 	std::cout<<"CPP Cross Platform with C++ 11 Features "<<std::endl;
 	printf("Hello Clang\n");
 	
-	cSingleton * singleton = cSingleton::getInstance();
+	Utilities::foo();
+
+	//cSingleton * singleton = cSingleton::getInstance();
 	
 	// Initial State of Vector
-	singleton->printVector();
+	//singleton->printVector();
+	GetSingleton().printVector();
 
 	string input = "";
 	int inputNumber = { 0 };
@@ -30,10 +34,12 @@ int main()
 			stringstream myStream(input);
 			if (myStream >> inputNumber)
 			{
-				singleton->addToContainer(inputNumber);
+				//singleton->addToContainer(inputNumber);
+				GetSingleton().addToContainer(inputNumber);
 
 				// Print New State of the vector
-				singleton->printVector();
+				//singleton->printVector();
+				GetSingleton().printVector();
 			}
 			else
 			{
@@ -49,9 +55,10 @@ int main()
 	}
 
 	// Last State of Vector
-	singleton->printVector();
+	//singleton->printVector();
+	GetSingleton().printVector();
 	
 	
-	cSingleton::destroy();
+	//cSingleton::destroy();
 	return 0;
 }
