@@ -4,6 +4,7 @@
 #include <boost/interprocess/managed_shared_memory.hpp>
 #include <boost/interprocess/containers/vector.hpp>
 #include <boost/interprocess/allocators/allocator.hpp>
+#include <boost/interprocess/sync/named_mutex.hpp>
 
 #ifdef WIN32
 #ifndef DLL_EXPORT
@@ -36,7 +37,8 @@ public:
 	void addToContainer(int item);
 private:
 	boost::interprocess::managed_shared_memory * segment;
-	//MyVector<int> m_vContainer;
+	boost::interprocess::named_mutex mutex;
+	bool wasSharedMemoryCreated;
 };
 
 #ifdef WIN32
