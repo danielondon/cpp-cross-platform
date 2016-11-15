@@ -15,7 +15,7 @@
 class ISingleton
 {
 public:
-	virtual void printVector() = 0;
+	virtual void printContainer() = 0;
 	virtual void addToContainer(int item) = 0;
 };
 
@@ -33,7 +33,7 @@ public:
 	cSingleton();
 	~cSingleton();
 	bool initSharedMemory(bool create);
-	void printVector();
+	void printContainer();
 	void addToContainer(int item);
 private:
 	boost::interprocess::managed_shared_memory * segment;

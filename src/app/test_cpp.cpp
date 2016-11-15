@@ -9,16 +9,15 @@ using namespace std;
 
 int main()
 {
+	// Basic Print Outs
 	std::cout<<"CPP Cross Platform with C++ 11 Features "<<std::endl;
 	printf("Hello Clang\n");
 	
+	// Using Static Library
 	Utilities::foo();
 
-	//cSingleton * singleton = cSingleton::getInstance();
-	
 	// Initial State of Vector
-	//singleton->printVector();
-	GetSingleton().printVector();
+	GetSingleton().printContainer();
 
 	string input = "";
 	int inputNumber = { 0 };
@@ -33,12 +32,11 @@ int main()
 			stringstream myStream(input);
 			if (myStream >> inputNumber)
 			{
-				//singleton->addToContainer(inputNumber);
+				// Add Item to the container
 				GetSingleton().addToContainer(inputNumber);
 
 				// Print New State of the vector
-				//singleton->printVector();
-				GetSingleton().printVector();
+				GetSingleton().printContainer();
 			}
 			else
 			{
@@ -53,11 +51,8 @@ int main()
 		}
 	}
 
-	// Last State of Vector
-	//singleton->printVector();
-	GetSingleton().printVector();
+	// Print Last State of Vector
+	GetSingleton().printContainer();
 	
-	
-	//cSingleton::destroy();
 	return 0;
 }

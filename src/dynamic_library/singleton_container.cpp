@@ -16,7 +16,7 @@ ISingleton& GetSingleton()
 	return instance;
 }
 
-void cSingleton::printVector()
+void cSingleton::printContainer()
 {
     scoped_lock<named_mutex> lock(mutex);
 
