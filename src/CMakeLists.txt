@@ -1,5 +1,13 @@
+#####################################
+# APPLICATIONS
+#####################################
 ADD_SUBDIRECTORY(scoped_enums)
 #ADD_SUBDIRECTORY(app)
+ADD_SUBDIRECTORY(auto_decltype)
+
+#####################################
+# LIBRARIES
+#####################################
 #ADD_SUBDIRECTORY(dynamic_library)
 ADD_SUBDIRECTORY(dynamic_library2)
 ADD_SUBDIRECTORY(static_library)
