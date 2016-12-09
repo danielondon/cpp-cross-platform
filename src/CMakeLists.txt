@@ -3,6 +3,7 @@
 #####################################
 ADD_SUBDIRECTORY(scoped_enums)
 #ADD_SUBDIRECTORY(app)
+ADD_SUBDIRECTORY(quiz)
 ADD_SUBDIRECTORY(auto_decltype)
 
 #####################################

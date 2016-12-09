@@ -1,0 +1,3 @@
+SET(TARGET quiz)
+ADD_EXECUTABLE (${TARGET} quiz.cpp)
+#TARGET_LINK_LIBRARIES(${TARGET} static_library)
