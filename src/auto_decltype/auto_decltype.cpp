@@ -5,6 +5,7 @@
 #include <vector>
 #include <type_traits>
 #include <tuple>
+#include <cmath>
 
 using namespace std;
 
@@ -19,11 +20,26 @@ vector<int> createVector()
 	return c;
 }
 
-template <class Container>
-void printContainer(Container const& container)
+void printContainer(vector<int> const& container)
 {
+	cout << "printContainer Const& " << endl;
 	std::copy(container.begin(), container.end(), ostream_iterator<int>(cout));
 	cout <<endl;
+}
+
+void printContainer(vector<int> && container)
+{
+	cout << "printContainer && " << endl;
+	std::copy(container.begin(), container.end(), ostream_iterator<int>(cout));
+	cout << endl;
+}
+
+template <class Container>
+void printContainerTemplate(Container && container)
+{
+	cout << "printContainer Template " << endl;
+	std::copy(container.begin(), container.end(), ostream_iterator<int>(cout));
+	cout << endl;
 }
 
 template <class Container, class Index>
@@ -33,6 +49,34 @@ auto doSomethingAndUpdate(Container && container, Index index) -> decltype(forwa
 	return container[index];
 }
 
+
+auto get_fun(int arg) -> double(*)(double)	
+{
+	switch (arg)
+	{
+	case 1: return std::fabs;
+	case 2: return std::sin;
+	default: return std::cos;
+	}
+}
+
+class Widget
+{
+public:
+	int value;
+};
+
+
+template<typename It>    // algorithm to dwim ("do what I mean")
+void printElementsFromContainer(It b, It e)    // for all elements in range from
+{                        // b to e
+	while (b != e) {
+		typename std::iterator_traits<It>::value_type const& currValue = *b;
+		//currValue++;
+		cout << "Printing element from template " << currValue << endl;
+		++b;
+	}
+}
 
 int main()
 {
@@ -45,15 +89,42 @@ int main()
 	cout << "Type of foo " << typeid(decltype(foo)).name() << endl;
 
 	/// LVALUE
+	printContainerTemplate(vector);
 	printContainer(vector);
 	//cout<<"Result is " << doSomethingAndUpdate(vector, 0)<<endl;
 	doSomethingAndUpdate(vector, 0) = 0;
+	printContainerTemplate(vector);
 	printContainer(vector);
 
 	/// RVALUE
+	printContainerTemplate(createVector());
 	printContainer(createVector());
 	int rvalue = doSomethingAndUpdate(createVector(), 2) ;
 	cout<<"Result rvalue is " << rvalue <<endl;
+
+	// auto for func
+	auto my_fun = get_fun(2);
+	std::cout << "type of my_fun: " << typeid(my_fun).name() << '\n';
+	std::cout << "my_fun: " << my_fun(3) << '\n';
+
+
+	// Decltype
+	Widget widget1{ 78 };
+	Widget & widgetRef2 = widget1;
+	widget1.value = 100;
+	auto widget3 = widgetRef2;
+	widget3.value = 200;
+	decltype(auto) widgetRef4 = widgetRef2;
+	widgetRef4.value = 500;
+
+	cout << "widget1 " << widget1.value << endl;
+	cout << "widgetRef2 " << widgetRef2.value << endl;
+	cout << "widget3 " << widget3.value << endl;
+	cout << "widgetRef4 " << widgetRef4.value << endl;
+
+	// auto advantage, for removing complexity
+	printElementsFromContainer(vector.begin(), vector.end());
+	printContainerTemplate(vector);
 
 	return 0;
 }

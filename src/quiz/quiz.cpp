@@ -12,7 +12,7 @@ template <typename T>
 void P(const T & x) { std::cout << x; }
 
 void foo(const void*) { P("v"); }
-void foo(const std::string&) { P("s"); }
+void foo(std::string const&) { P("s"); }
 
 int main()
 {
@@ -26,9 +26,11 @@ int main()
 		P(i);
 	// Is unsigned int greater than -1?
 	// What is cast to what? i to int, or -1 to unsigned ?
+	// -1 will be implicitly casted to Unsigned int, where -1 is the biggest number for an unsigned int
 	if (i > -1)
 		P("z");
-	// foo overload to void*, instead of const&, why?
+	// foo overload to void*, instead of const&, why? What you think is a const "string", it is a cont char * , which
+	// matches better to a void *
 	foo("Conan!");
 	
 	// Final Result : 3210123v
