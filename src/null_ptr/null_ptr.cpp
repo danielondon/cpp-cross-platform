@@ -39,15 +39,17 @@ int main()
 	}
 	cout << endl << "----Using Wrappers-----" << endl;
 
-	auto returnValue1 = wrapperFunction(f1, nullptr);
-	auto returnValue2 = wrapperFunction(f2, nullptr);
-	auto returnValue3 = wrapperFunction(f3, nullptr);
-
-
-	auto returnValue1 = wrapperFunction(f1, 0);
-	auto returnValue2 = wrapperFunction(f2, 0);
-	auto returnValue3 = wrapperFunction(f3, 0);
-
+	{
+		auto returnValue1 = wrapperFunction(f1, nullptr);
+		auto returnValue2 = wrapperFunction(f2, nullptr);
+		auto returnValue3 = wrapperFunction(f3, nullptr);
+	}
+	// This does not build, because template can not resolve 0 as a pointer
+	{
+		//auto returnValue1 = wrapperFunction(f1, 0);
+		//auto returnValue2 = wrapperFunction(f2, 0);
+		//auto returnValue3 = wrapperFunction(f3, 0);
+	}
 
 	return 0;
 }

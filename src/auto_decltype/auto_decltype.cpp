@@ -88,6 +88,10 @@ int main()
 	cout << "Type of foo() " << typeid(decltype(foo())).name() << endl;
 	cout << "Type of foo " << typeid(decltype(foo)).name() << endl;
 
+	cout << "Type of vector " << typeid(vector).name() << endl;
+	cout << "Type of foo() " << typeid(foo()).name() << endl;
+	cout << "Type of foo " << typeid(foo).name() << endl;
+
 	/// LVALUE
 	printContainerTemplate(vector);
 	printContainer(vector);
