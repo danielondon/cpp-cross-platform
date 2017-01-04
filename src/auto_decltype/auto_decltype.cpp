@@ -1,11 +1,10 @@
-#include <stdio.h>
 #include <iostream>
 #include <iterator> // std::copy
 #include <sstream>
 #include <vector>
-#include <type_traits>
 #include <tuple>
 #include <cmath>
+#include <typeinfo> // Avoids exception in clang/linux member access into incomplete type 'const std::type_info'
 
 using namespace std;
 
@@ -78,6 +77,11 @@ void printElementsFromContainer(It b, It e)    // for all elements in range from
 	}
 }
 
+float dummyFloatFunction(float x)
+{
+    return x;
+}
+
 int main()
 {
 	std::cout<<"auto and decltype using Clang"<<std::endl;
@@ -109,6 +113,9 @@ int main()
 	// auto for func
 	auto my_fun = get_fun(2);
 	std::cout << "type of my_fun: " << typeid(my_fun).name() << '\n';
+    std::cout << "type of my_fun eval: " << typeid(my_fun(5)).name() << '\n';
+    std::cout << "type of dummy float func: " << typeid(&dummyFloatFunction).name() << '\n';
+    std::cout << "type of sin: " << typeid(std::sin(3.0f)).name() << '\n';
 	std::cout << "my_fun: " << my_fun(3) << '\n';
 
 

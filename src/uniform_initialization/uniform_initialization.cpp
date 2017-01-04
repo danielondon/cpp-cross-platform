@@ -1,5 +1,4 @@
 #include <iostream>
-#include <string>
 #include <vector>
 #include <algorithm>
 
@@ -41,13 +40,13 @@ int main()
 	w3 = w1;
 	cout << "----" << w3 << endl;
 	Widget w4 = Widget();
-	cout << "----" << w3 << endl;
+	cout << "----" << w4 << endl;
 	Widget w5{ w2 };
-	cout << "----" << w3 << endl;
+	cout << "----" << w5 << endl;
 
 	double x = 1;
 	double y = 23;
-	int sum{ x + y };
+	double sum{ x + y };
 	cout << "Sum " << sum << endl;
 
 	return 0;
