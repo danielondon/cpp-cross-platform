@@ -1,1 +1,3 @@
 .idea/
+conanbuildinfo.cmake
+conaninfo.txt

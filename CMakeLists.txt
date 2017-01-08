@@ -1,11 +1,17 @@
 cmake_minimum_required(VERSION 3.6)
 PROJECT(cpp_cross_platform)
 
+MESSAGE("CMAKE_SOURCE_DIR ${CMAKE_SOURCE_DIR}")
+
+#CONAN
+execute_process(COMMAND ${CMAKE_SOURCE_DIR}/install.bat ${CMAKE_SOURCE_DIR})
+if(EXISTS ${CMAKE_SOURCE_DIR}/conanbuildinfo.cmake)
+    include(${CMAKE_SOURCE_DIR}/conanbuildinfo.cmake)
+    conan_basic_setup()
+endif()
+
 #Boost
-FIND_PACKAGE(Boost)
-MESSAGE("Boost_INCLUDE_DIRS ${Boost_INCLUDE_DIRS}")
-INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})
-#link_directories(${Boost_LIBRARY_DIRS})
+FIND_PACKAGE(Boost REQUIRED)
 
 # C++ 11
 SET(CMAKE_CXX_STANDARD 11)
