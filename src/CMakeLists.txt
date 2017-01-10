@@ -11,6 +11,7 @@ ADD_SUBDIRECTORY(null_ptr)
 ADD_SUBDIRECTORY(range_based_loops)
 ADD_SUBDIRECTORY(bool_pitfall)
 ADD_SUBDIRECTORY(observer)
+ADD_SUBDIRECTORY(trailing_return_types)
 
 #####################################
 # LIBRARIES
