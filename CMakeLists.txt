@@ -4,7 +4,10 @@ PROJECT(cpp_cross_platform)
 MESSAGE("CMAKE_SOURCE_DIR ${CMAKE_SOURCE_DIR}")
 
 #CONAN
-execute_process(COMMAND ${CMAKE_SOURCE_DIR}/install.bat ${CMAKE_SOURCE_DIR})
+if (${WIN32})
+    execute_process(COMMAND ${CMAKE_SOURCE_DIR}/install.bat ${CMAKE_SOURCE_DIR})
+endif()
+
 if(EXISTS ${CMAKE_SOURCE_DIR}/conanbuildinfo.cmake)
     include(${CMAKE_SOURCE_DIR}/conanbuildinfo.cmake)
     conan_basic_setup()
