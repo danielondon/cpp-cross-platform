@@ -16,8 +16,24 @@ endif()
 #Boost
 FIND_PACKAGE(Boost REQUIRED)
 
-# C++ 11
-SET(CMAKE_CXX_STANDARD 11)
+#Check C++ 11 and C++ 14
+include(CheckCXXCompilerFlag)
+
+CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORTS_CXX11)
+if(COMPILER_SUPPORTS_CXX11)
+  MESSAGE("SUPPORTS C++ 11")
+  SET(CMAKE_CXX_STANDARD 11)
+else()
+  MESSAGE("DOES NOT SUPPORT C++ 11")
+endif()
+
+CHECK_CXX_COMPILER_FLAG("-std=c++14" COMPILER_SUPPORTS_CXX14)
+if(COMPILER_SUPPORTS_CXX14)
+  MESSAGE("SUPPORTS C++ 14")
+  SET(CMAKE_CXX_STANDARD 14)
+else()
+  MESSAGE("DOES NOT SUPPORT C++ 14")
+endif()
 
 # Flags (Trying different ways to enable try/catch/throw with VS2015 and CLang)
 
