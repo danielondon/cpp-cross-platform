@@ -4,6 +4,7 @@
 #include <vector>
 #include "../dynamic_library/singleton_container.h"
 #include "../static_library/utilities.h"
+#include <boost/format.hpp>
 
 using namespace std;
 
@@ -12,6 +13,7 @@ int main()
 	// Basic Print Outs
 	std::cout<<"CPP Cross Platform with C++ 11 Features "<<std::endl;
 	printf("Hello Clang\n");
+    cout << boost::format("Using Boost Format in year %1%") % 2017<<endl;
 	
 	// Using Static Library
 	Utilities::foo();
