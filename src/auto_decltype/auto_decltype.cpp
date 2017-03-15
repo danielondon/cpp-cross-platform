@@ -3,6 +3,8 @@
 #include <sstream>
 #include <vector>
 #include <tuple>
+#include <map>
+#include <queue>
 #include <cmath>
 #include <typeinfo> // Avoids exception in clang/linux member access into incomplete type 'const std::type_info'
 
@@ -82,20 +84,62 @@ float dummyFloatFunction(float x)
     return x;
 }
 
+template <typename Iterator>
+void useIteratorValue(Iterator it)
+{
+    //typename std::iterator_traits<Iterator>::value_type currentValue = *it;
+    auto currentValue = *it;
+    cout << "current Value " << currentValue<<endl;
+}
+
+template <typename Container>
+void templateContainerFunction(Container & myContainer)
+{
+    cout << "Size of Container " << myContainer.size() << endl;
+
+    Container::const_iterator it = myContainer.cbegin();
+
+    useIteratorValue(it);
+}
+
+template< typename T >
+//void printInitializerList(std::initializer_list<T> initList)
+void printInitializerList(T initList)
+{
+    for (auto x : initList)
+    {
+        cout << x << " ";
+    }
+    cout << endl;
+}
+
+
 int main()
 {
+    auto initList = { 1, 2, 3 };
+    printInitializerList(initList);
+    //printInitializerList({ 1, 2, 3 });
+
+    std::vector<int> container1;
+    container1.push_back(98);
+    std::vector<double> container2;
+    container2.push_back(34.23);
+    std::vector<bool> container3;    
+    container3.push_back(false);
+
+    templateContainerFunction(container1);
+    templateContainerFunction(container2);
+    templateContainerFunction(container3);
+
+
 	std::cout<<"auto and decltype using Clang"<<std::endl;
 
 	vector<int> vector{ 1, 2, 3, 4};
 
-	cout << "Type of vector "<< typeid(decltype(vector)).name() << endl;
-	cout << "Type of foo() " << typeid(decltype(foo())).name() << endl;
-	cout << "Type of foo " << typeid(decltype(foo)).name() << endl;
-
-	cout << "Type of vector " << typeid(vector).name() << endl;
-	cout << "Type of foo() " << typeid(foo()).name() << endl;
-	cout << "Type of foo " << typeid(foo).name() << endl;
-
+	cout << "decltype of vector "<< typeid(decltype(vector)).name() << endl;
+	cout << "decltype of foo() " << typeid(decltype(foo())).name() << endl;
+	cout << "decltype of foo " << typeid(decltype(foo)).name() << endl;
+    
 	/// LVALUE
 	printContainerTemplate(vector);
 	printContainer(vector);
@@ -136,6 +180,15 @@ int main()
 	// auto advantage, for removing complexity
 	printElementsFromContainer(vector.begin(), vector.end());
 	printContainerTemplate(vector);
+
+
+    /// Check Auto function
+    double number = -0.5;
+    cout << "get_fun(0) " << get_fun(0)(number) << endl;
+    cout << "get_fun(1) " << get_fun(1)(number) << endl;
+    cout << "get_fun(2) " << get_fun(2)(number) << endl;
+
+
 
 	return 0;
 }

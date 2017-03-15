@@ -12,6 +12,11 @@ ADD_SUBDIRECTORY(range_based_loops)
 ADD_SUBDIRECTORY(bool_pitfall)
 ADD_SUBDIRECTORY(observer)
 ADD_SUBDIRECTORY(trailing_return_types)
+ADD_SUBDIRECTORY(threads)
+ADD_SUBDIRECTORY(file_handler)
+ADD_SUBDIRECTORY(static_assertion)
+ADD_SUBDIRECTORY(override)
+ADD_SUBDIRECTORY(lambda)
 
 #####################################
 # LIBRARIES

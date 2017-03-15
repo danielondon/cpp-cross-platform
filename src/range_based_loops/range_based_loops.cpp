@@ -52,6 +52,8 @@ int main()
 {
 	std::cout << "Range Based Loops with Clang" << std::endl;
 
+
+
 	//std::vector<int> nums{ 3, 4, 2, 8, 15, 267 };
 	MyVector nums{ 3, 4, 2, 8, 15, 267 };
 
@@ -97,6 +99,11 @@ int main()
 	for (auto & n : myList) // the initializer may be a braced-init-list
 		std::cout << n << ' ';
 	cout << endl;
+
+
+    // TODO: SHOW FOR_EACH
+
+    // TODO: SHOW RANGES LIB
 
 	return 0;
 }
