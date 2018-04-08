@@ -16,6 +16,7 @@ ADD_SUBDIRECTORY(file_handler)
 ADD_SUBDIRECTORY(static_assertion)
 ADD_SUBDIRECTORY(override)
 ADD_SUBDIRECTORY(lambda)
+ADD_SUBDIRECTORY(smart_pointers)
 
 #####################################
 # LIBRARIES
