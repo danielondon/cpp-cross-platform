@@ -2,7 +2,6 @@
 # APPLICATIONS
 #####################################
 
-ADD_SUBDIRECTORY(app)
 ADD_SUBDIRECTORY(quiz)
 ADD_SUBDIRECTORY(auto_decltype)
 ADD_SUBDIRECTORY(scoped_enums)
@@ -21,6 +20,12 @@ ADD_SUBDIRECTORY(lambda)
 #####################################
 # LIBRARIES
 #####################################
-ADD_SUBDIRECTORY(dynamic_library)
+IF(Boost_FOUND)
+	ADD_SUBDIRECTORY(linking_libraries_app)
+	ADD_SUBDIRECTORY(dynamic_library)
+ELSE()
+	MESSAGE("Skipping dynamic_library because Boost is not found")
+ENDIF(Boost_FOUND)
+
 ADD_SUBDIRECTORY(dynamic_library2)
 ADD_SUBDIRECTORY(static_library)

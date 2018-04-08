@@ -8,10 +8,12 @@ execute_process(COMMAND ${CMAKE_SOURCE_DIR}/install.bat ${CMAKE_SOURCE_DIR})
 if(EXISTS ${CMAKE_SOURCE_DIR}/conanbuildinfo.cmake)
     include(${CMAKE_SOURCE_DIR}/conanbuildinfo.cmake)
     conan_basic_setup()
+else()
+	MESSAGE("CONAN is not installed. No Dependencies like Boost can be set.")
 endif()
-
+	
 #Boost
-FIND_PACKAGE(Boost REQUIRED)
+FIND_PACKAGE(Boost)
 
 # C++ 11
 SET(CMAKE_CXX_STANDARD 11)
