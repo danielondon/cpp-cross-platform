@@ -2,8 +2,10 @@
 #include <iostream>
 #include <memory>
 #include <typeinfo>
+#include <unordered_map>
 
 using namespace std;
+
 
 class Investment
 {
@@ -15,19 +17,31 @@ public:
 };
 
 class Stock : public Investment
-{
-
+{    
     ~Stock()
     {
         cout << "~Stock" << endl;
     }
+public:
+    Stock()
+    {
+        cout << "Stock" << endl;
+    }
+
 };
 
-class Bond : public Investment{
+class Bond : public Investment
+{ 
     ~Bond()
     {
         cout << "~Bond" << endl;
     }
+public:
+    Bond()
+    {
+        cout << "Bond" << endl;
+    }
+
 };
 
 void makeLogEntry(Investment * pInvestment)
@@ -35,10 +49,11 @@ void makeLogEntry(Investment * pInvestment)
     cout << "Log Entry " << typeid(*pInvestment).name() << endl;
 }
 
-auto delInvmt = [](Investment* pInvestment) // custom
-{ // deleter
-    makeLogEntry(pInvestment); // (a lambda
-    delete pInvestment; // expression)
+// Custom Deleter with Lambda
+auto delInvmt = [](Investment* pInvestment) 
+{ 
+    makeLogEntry(pInvestment); 
+    delete pInvestment; 
 };
 
 
@@ -61,9 +76,25 @@ makeInvestment(int type, Ts&&... params)
     return pInv;
 }
 
+
+
+shared_ptr<const Investment> fastLoadStock(int stockId)
+{
+    static unordered_map<int, weak_ptr<Investment>> cache;
+    auto objPtr = cache[stockId].lock();
+    if (!objPtr)
+    {
+        objPtr = makeInvestment(0);
+        cache[stockId] = objPtr;
+    }
+
+    return objPtr;
+
+}
+
 int main()
 {
-	std::cout << "Smart Pointers -------" << std::endl << endl;
+	std::cout << "----------- Unique Pointers -------" << std::endl << endl;
     std::cout << "--RAW--" << endl;
     {
         Investment * inv = new Bond;
@@ -90,6 +121,24 @@ int main()
     std::cout << "--" << endl;
     {
         auto inv = makeInvestment(1);
+    }
+
+    std::cout << std::endl << endl << "--------- Weak Pointers -------" << std::endl << endl;
+    {
+        auto inv1 = fastLoadStock(1);  
+        std::cout << "--" << endl;
+        {
+            auto inv2 = fastLoadStock(2);
+        }
+        std::cout << "--" << endl;
+        {
+            auto inv2 = fastLoadStock(1);
+        }
+        std::cout << "--" << endl;
+        {
+            auto inv2 = fastLoadStock(2);
+        }
+        std::cout << "--" << endl;
     }
 
     return 0;
