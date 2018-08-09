@@ -18,6 +18,7 @@ ADD_SUBDIRECTORY(override)
 ADD_SUBDIRECTORY(lambda)
 ADD_SUBDIRECTORY(smart_pointers)
 ADD_SUBDIRECTORY(variadic_templates)
+ADD_SUBDIRECTORY(coroutines)
 
 #####################################
 # LIBRARIES
