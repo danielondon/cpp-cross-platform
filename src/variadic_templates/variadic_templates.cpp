@@ -52,14 +52,18 @@ std::vector<string> convert_to_string_multiple(const Param & ... param)
 template <typename T>
 T mysum(T t)
 {
+#ifdef MSVC
     std::cout << __FUNCSIG__ << " * \n";
+#endif
     return t;
 }
 
 template <typename Param1, typename ... Param>
 Param1 mysum(Param1 param1, Param ... param)
 {
+#ifdef MSVC
     std::cout << __FUNCSIG__ << "\n";
+#endif
     return param1 + mysum(param...);
 }
 

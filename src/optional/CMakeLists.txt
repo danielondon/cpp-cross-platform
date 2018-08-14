@@ -1,0 +1,4 @@
+SET(TARGET optional)
+
+set(CMAKE_CXX_STANDARD 17)
+ADD_EXECUTABLE (${TARGET} optional.cpp)
