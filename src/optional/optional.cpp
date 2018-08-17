@@ -7,7 +7,7 @@ using namespace std;
 class UserName
 {
 public:
-    explicit UserName(const std::string & str): mName(str)
+    explicit UserName(const std::string & str, optional<int> _age): mName(str), age(_age)
     {
         cout<<"UserName "<<mName<<endl;
     }
@@ -17,6 +17,7 @@ public:
     }
 private:
     string mName;
+    optional<int> age;
 };
 
 void printName(optional<string> & name)
@@ -30,17 +31,25 @@ void printName(optional<string> & name)
 int main() {
     cout << "Optional Test c++ 17" << endl;
     { // TEST 1
+        UserName ricardo { "Ricardo", nullopt };
         std::optional<UserName> eEmpty;
         cout << "---" << endl;
-        eEmpty.emplace("Steve");
+        eEmpty.emplace("Steve", 1);
         cout << "---" << endl;
-        eEmpty.emplace("Mark");
+        eEmpty.emplace("Mark", nullopt);
         cout << "---" << endl;
         eEmpty.reset();
         cout << "---" << endl;
-        eEmpty.emplace("Fred");
+        eEmpty.emplace("Fred", 3);
         cout << "---" << endl;
-        eEmpty = UserName("Daniel");
+        eEmpty = UserName("Daniel", 4);
+        cout << "---" << endl;
+        eEmpty = UserName { "Francisco", nullopt };
+        cout << "---" << endl;
+        eEmpty = ricardo;
+        cout << "---" << endl;
+        std::optional<UserName> eEmpty2;
+        eEmpty2.swap(eEmpty);
         cout << "---" << endl;
     }
 cout<<"*************"<<endl;

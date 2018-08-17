@@ -20,6 +20,7 @@ ADD_SUBDIRECTORY(smart_pointers)
 ADD_SUBDIRECTORY(variadic_templates)
 ADD_SUBDIRECTORY(coroutines)
 ADD_SUBDIRECTORY(optional)
+ADD_SUBDIRECTORY(structured_bindings)
 
 #####################################
 # LIBRARIES
